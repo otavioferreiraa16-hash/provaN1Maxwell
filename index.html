@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="login-box">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username">
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password">
+            </div>
+
+            <button type="submit">Entrar</button>
+            <p id="result"></p>
+        </form>
+    </div>
+
+    <script>
+        // 5. Integração Cliente-Servidor
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const resultDisplay = document.getElementById('result');
+
+            resultDisplay.className = '';
+            resultDisplay.textContent = 'Conectando...';
+
+            try {
+                // Requisição HTTP usando fetch
+                const response = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                // Tratamento da resposta
+                if (!response.ok) {
+                    resultDisplay.textContent = data.message;
+                    resultDisplay.className = 'error';
+                } else {
+                    resultDisplay.textContent = data.message;
+                    resultDisplay.style.color = 'green'; 
+                }
+
+            } catch (error) {
+                resultDisplay.textContent = 'Erro ao conectar ao servidor.';
+                resultDisplay.className = 'error';
+            }
+        });
+    </script>
+</body>
+</html>
