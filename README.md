@@ -34,3 +34,7 @@ ProvaN1Max/
 ├── server.js     # Servidor Express
 └── package.json  # Dependências
 ```
+Dependências principais
+
+express — servidor HTTP
+cors — habilita requisições cross-origin
