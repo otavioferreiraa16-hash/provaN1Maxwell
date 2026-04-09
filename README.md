@@ -37,4 +37,5 @@ ProvaN1Max/
 Dependências principais
 
 express — servidor HTTP
+
 cors — habilita requisições cross-origin
