@@ -27,7 +27,6 @@
     </div>
 
     <script>
-        // 5. Integração Cliente-Servidor
         document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
@@ -39,7 +38,6 @@
             resultDisplay.textContent = 'Conectando...';
 
             try {
-                // Requisição HTTP usando fetch
                 const response = await fetch('http://localhost:3000/login', {
                     method: 'POST',
                     headers: {
@@ -50,7 +48,6 @@
 
                 const data = await response.json();
 
-                // Tratamento da resposta
                 if (!response.ok) {
                     resultDisplay.textContent = data.message;
                     resultDisplay.className = 'error';
